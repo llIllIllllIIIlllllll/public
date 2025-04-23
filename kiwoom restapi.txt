@@ -1,0 +1,1917 @@
+import requests
+import json
+
+# 접근토큰 발급
+def fn_au10001(data):
+	# 1. 요청할 API URL
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	host = 'https://api.kiwoom.com' # 실전투자
+	endpoint = '/oauth2/token'
+	url =  host + endpoint
+
+	# 2. header 데이터
+	headers = {
+		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+	}
+
+	# 3. http POST 요청
+	response = requests.post(url, headers=headers, json=data)
+
+	# 4. 응답 상태 코드와 데이터 출력
+	print('Code:', response.status_code)
+	print('Header:', json.dumps({key: response.headers.get(key) for key in ['next-key', 'cont-yn', 'api-id']}, indent=4, ensure_ascii=False))
+	print('Body:', json.dumps(response.json(), indent=4, ensure_ascii=False))  # JSON 응답을 파싱하여 출력
+
+# 실행 구간
+if __name__ == '__main__':
+	# 1. 요청 데이터
+	params = {
+		'grant_type': 'client_credentials',  # grant_type
+		'appkey': 'AxserEsdcredca.....',  # 앱키
+		'secretkey': 'SEefdcwcforehDre2fdvc....',  # 시크릿키
+	}
+
+	# 2. API 실행
+	fn_au10001(data=params)
+
+import requests
+import json
+
+# 접근토큰폐기
+def fn_au10002(data):
+	# 1. 요청할 API URL
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	host = 'https://api.kiwoom.com' # 실전투자
+	endpoint = '/oauth2/revoke'
+	url =  host + endpoint
+
+	# 2. header 데이터
+	headers = {
+		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+	}
+
+	# 3. http POST 요청
+	response = requests.post(url, headers=headers, json=data)
+
+	# 4. 응답 상태 코드와 데이터 출력
+	print('Code:', response.status_code)
+	print('Header:', json.dumps({key: response.headers.get(key) for key in ['next-key', 'cont-yn', 'api-id']}, indent=4, ensure_ascii=False))
+	print('Body:', json.dumps(response.json(), indent=4, ensure_ascii=False))  # JSON 응답을 파싱하여 출력
+
+# 실행 구간
+if __name__ == '__main__':
+	# 1. 요청 데이터
+	params = {
+		'appkey': 'AxserEsdcredca.....',  # 앱키
+		'secretkey': 'SEefdcwcforehDre2fdvc....',  # 시크릿키
+		'token': 'WQJCwyqInphKnR3bSRtB9NE1lv...',  # 토큰
+	}
+
+	# 2. API 실행
+	fn_au10002(data=params)
+
+import requests
+import json
+
+# 주식호가요청
+def fn_ka10004(token, data, cont_yn='N', next_key=''):
+	# 1. 요청할 API URL
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	host = 'https://api.kiwoom.com' # 실전투자
+	endpoint = '/api/dostk/mrkcond'
+	url =  host + endpoint
+
+	# 2. header 데이터
+	headers = {
+		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'authorization': f'Bearer {token}', # 접근토큰
+		'cont-yn': cont_yn, # 연속조회여부
+		'next-key': next_key, # 연속조회키
+		'api-id': 'ka10004', # TR명
+	}
+
+	# 3. http POST 요청
+	response = requests.post(url, headers=headers, json=data)
+
+	# 4. 응답 상태 코드와 데이터 출력
+	print('Code:', response.status_code)
+	print('Header:', json.dumps({key: response.headers.get(key) for key in ['next-key', 'cont-yn', 'api-id']}, indent=4, ensure_ascii=False))
+	print('Body:', json.dumps(response.json(), indent=4, ensure_ascii=False))  # JSON 응답을 파싱하여 출력
+
+# 실행 구간
+if __name__ == '__main__':
+	# 1. 토큰 설정
+	MY_ACCESS_TOKEN = '사용자 AccessToken'# 접근토큰
+
+	# 2. 요청 데이터
+	params = {
+		'stk_cd': '005930', # 종목코드 거래소별 종목코드 (KRX:039490,NXT:039490_NX,SOR:039490_AL)
+	}
+
+	# 3. API 실행
+	fn_ka10004(token=MY_ACCESS_TOKEN, data=params)
+
+	# next-key, cont-yn 값이 있을 경우
+	# fn_ka10004(token=MY_ACCESS_TOKEN, data=params, cont_yn='Y', next_key='nextkey..')
+
+import requests
+import json
+
+# 전일대비등락률상위요청
+def fn_ka10027(token, data, cont_yn='N', next_key=''):
+	# 1. 요청할 API URL
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	host = 'https://api.kiwoom.com' # 실전투자
+	endpoint = '/api/dostk/rkinfo'
+	url =  host + endpoint
+
+	# 2. header 데이터
+	headers = {
+		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'authorization': f'Bearer {token}', # 접근토큰
+		'cont-yn': cont_yn, # 연속조회여부
+		'next-key': next_key, # 연속조회키
+		'api-id': 'ka10027', # TR명
+	}
+
+	# 3. http POST 요청
+	response = requests.post(url, headers=headers, json=data)
+
+	# 4. 응답 상태 코드와 데이터 출력
+	print('Code:', response.status_code)
+	print('Header:', json.dumps({key: response.headers.get(key) for key in ['next-key', 'cont-yn', 'api-id']}, indent=4, ensure_ascii=False))
+	print('Body:', json.dumps(response.json(), indent=4, ensure_ascii=False))  # JSON 응답을 파싱하여 출력
+
+# 실행 구간
+if __name__ == '__main__':
+	# 1. 토큰 설정
+	MY_ACCESS_TOKEN = '사용자 AccessToken'# 접근토큰
+
+	# 2. 요청 데이터
+	params = {
+		'mrkt_tp': '000', # 시장구분 000:전체, 001:코스피, 101:코스닥
+		'sort_tp': '1', # 정렬구분 1:상승률, 2:상승폭, 3:하락률, 4:하락폭
+		'trde_qty_cnd': '0000', # 거래량조건 0000:전체조회, 0010:만주이상, 0050:5만주이상, 0100:10만주이상, 0150:15만주이상, 0200:20만주이상, 0300:30만주이상, 0500:50만주이상, 1000:백만주이상
+		'stk_cnd': '0', # 종목조건 0:전체조회, 1:관리종목제외, 4:우선주+관리주제외, 3:우선주제외, 5:증100제외, 6:증100만보기, 7:증40만보기, 8:증30만보기, 9:증20만보기, 11:정리매매종목제외
+		'crd_cnd': '0', # 신용조건 0:전체조회, 1:신용융자A군, 2:신용융자B군, 3:신용융자C군, 4:신용융자D군, 9:신용융자전체
+		'updown_incls': '1', # 상하한포함 0:불 포함, 1:포함
+		'pric_cnd': '0', # 가격조건 0:전체조회, 1:1천원미만, 2:1천원~2천원, 3:2천원~5천원, 4:5천원~1만원, 5:1만원이상, 8:1천원이상
+		'trde_prica_cnd': '0', # 거래대금조건 0:전체조회, 3:3천만원이상, 5:5천만원이상, 10:1억원이상, 30:3억원이상, 50:5억원이상, 100:10억원이상, 300:30억원이상, 500:50억원이상, 1000:100억원이상, 3000:300억원이상, 5000:500억원이상
+		'stex_tp': '3', # 거래소구분 1:KRX, 2:NXT 3.통합
+	}
+
+	# 3. API 실행
+	fn_ka10027(token=MY_ACCESS_TOKEN, data=params)
+
+	# next-key, cont-yn 값이 있을 경우
+	# fn_ka10027(token=MY_ACCESS_TOKEN, data=params, cont_yn='Y', next_key='nextkey..')
+
+import requests
+import json
+
+# 시간외단일가등락율순위요청
+def fn_ka10098(token, data, cont_yn='N', next_key=''):
+	# 1. 요청할 API URL
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	host = 'https://api.kiwoom.com' # 실전투자
+	endpoint = '/api/dostk/rkinfo'
+	url =  host + endpoint
+
+	# 2. header 데이터
+	headers = {
+		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'authorization': f'Bearer {token}', # 접근토큰
+		'cont-yn': cont_yn, # 연속조회여부
+		'next-key': next_key, # 연속조회키
+		'api-id': 'ka10098', # TR명
+	}
+
+	# 3. http POST 요청
+	response = requests.post(url, headers=headers, json=data)
+
+	# 4. 응답 상태 코드와 데이터 출력
+	print('Code:', response.status_code)
+	print('Header:', json.dumps({key: response.headers.get(key) for key in ['next-key', 'cont-yn', 'api-id']}, indent=4, ensure_ascii=False))
+	print('Body:', json.dumps(response.json(), indent=4, ensure_ascii=False))  # JSON 응답을 파싱하여 출력
+
+# 실행 구간
+if __name__ == '__main__':
+	# 1. 토큰 설정
+	MY_ACCESS_TOKEN = '사용자 AccessToken'# 접근토큰
+
+	# 2. 요청 데이터
+	params = {
+		'mrkt_tp': '000', # 시장구분 000:전체,001:코스피,101:코스닥
+		'sort_base': '5', # 정렬기준 1:상승률,2:상승폭,3:하락률,4:하락폭,5:보합
+		'stk_cnd': '0', # 종목조건 0:전체조회,1:관리종목제외,2:정리매매종목제외,3:우선주제외,4:관리종목우선주제외,5:증100제외,6:증100만보기,7:증40만보기,8:증30만보기,9:증20만보기,12:증50만보기,13:증60만보기,14:ETF제외,15:스팩제외,16:ETF+ETN제외,17:ETN제외
+		'trde_qty_cnd': '0', # 거래량조건 0:전체조회, 10:백주이상,50:5백주이상,100;천주이상, 500:5천주이상, 1000:만주이상, 5000:5만주이상, 10000:10만주이상
+		'crd_cnd': '0', # 신용조건 0:전체조회, 1:신용융자A군, 2:신용융자B군, 3:신용융자C군, 4:신용융자D군, 9:신용융자전체
+		'trde_prica': '0', # 거래대금 0:전체조회, 5:5백만원이상,10:1천만원이상, 30:3천만원이상, 50:5천만원이상, 100:1억원이상, 300:3억원이상, 500:5억원이상, 1000:10억원이상, 3000:30억원이상, 5000:50억원이상, 10000:100억원이상
+	}
+
+	# 3. API 실행
+	fn_ka10098(token=MY_ACCESS_TOKEN, data=params)
+
+	# next-key, cont-yn 값이 있을 경우
+	# fn_ka10098(token=MY_ACCESS_TOKEN, data=params, cont_yn='Y', next_key='nextkey..')
+
+import requests
+import json
+
+# 거래대금상위요청
+def fn_ka10032(token, data, cont_yn='N', next_key=''):
+	# 1. 요청할 API URL
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	host = 'https://api.kiwoom.com' # 실전투자
+	endpoint = '/api/dostk/rkinfo'
+	url =  host + endpoint
+
+	# 2. header 데이터
+	headers = {
+		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'authorization': f'Bearer {token}', # 접근토큰
+		'cont-yn': cont_yn, # 연속조회여부
+		'next-key': next_key, # 연속조회키
+		'api-id': 'ka10032', # TR명
+	}
+
+	# 3. http POST 요청
+	response = requests.post(url, headers=headers, json=data)
+
+	# 4. 응답 상태 코드와 데이터 출력
+	print('Code:', response.status_code)
+	print('Header:', json.dumps({key: response.headers.get(key) for key in ['next-key', 'cont-yn', 'api-id']}, indent=4, ensure_ascii=False))
+	print('Body:', json.dumps(response.json(), indent=4, ensure_ascii=False))  # JSON 응답을 파싱하여 출력
+
+# 실행 구간
+if __name__ == '__main__':
+	# 1. 토큰 설정
+	MY_ACCESS_TOKEN = '사용자 AccessToken'# 접근토큰
+
+	# 2. 요청 데이터
+	params = {
+		'mrkt_tp': '001', # 시장구분 000:전체, 001:코스피, 101:코스닥
+		'mang_stk_incls': '1', # 관리종목포함 0:관리종목 미포함, 1:관리종목 포함
+		'stex_tp': '3', # 거래소구분 1:KRX, 2:NXT 3.통합
+	}
+
+	# 3. API 실행
+	fn_ka10032(token=MY_ACCESS_TOKEN, data=params)
+
+	# next-key, cont-yn 값이 있을 경우
+	# fn_ka10032(token=MY_ACCESS_TOKEN, data=params, cont_yn='Y', next_key='nextkey..')
+
+import requests
+import json
+
+# 당일거래량상위요청
+def fn_ka10030(token, data, cont_yn='N', next_key=''):
+	# 1. 요청할 API URL
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	host = 'https://api.kiwoom.com' # 실전투자
+	endpoint = '/api/dostk/rkinfo'
+	url =  host + endpoint
+
+	# 2. header 데이터
+	headers = {
+		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'authorization': f'Bearer {token}', # 접근토큰
+		'cont-yn': cont_yn, # 연속조회여부
+		'next-key': next_key, # 연속조회키
+		'api-id': 'ka10030', # TR명
+	}
+
+	# 3. http POST 요청
+	response = requests.post(url, headers=headers, json=data)
+
+	# 4. 응답 상태 코드와 데이터 출력
+	print('Code:', response.status_code)
+	print('Header:', json.dumps({key: response.headers.get(key) for key in ['next-key', 'cont-yn', 'api-id']}, indent=4, ensure_ascii=False))
+	print('Body:', json.dumps(response.json(), indent=4, ensure_ascii=False))  # JSON 응답을 파싱하여 출력
+
+# 실행 구간
+if __name__ == '__main__':
+	# 1. 토큰 설정
+	MY_ACCESS_TOKEN = '사용자 AccessToken'# 접근토큰
+
+	# 2. 요청 데이터
+	params = {
+		'mrkt_tp': '000', # 시장구분 000:전체, 001:코스피, 101:코스닥
+		'sort_tp': '1', # 정렬구분 1:거래량, 2:거래회전율, 3:거래대금
+		'mang_stk_incls': '0', # 관리종목포함 0:관리종목 포함, 1:관리종목 미포함, 3:우선주제외, 11:정리매매종목제외, 4:관리종목, 우선주제외, 5:증100제외, 6:증100마나보기, 13:증60만보기, 12:증50만보기, 7:증40만보기, 8:증30만보기, 9:증20만보기, 14:ETF제외, 15:스팩제외, 16:ETF+ETN제외
+		'crd_tp': '0', # 신용구분 0:전체조회, 9:신용융자전체, 1:신용융자A군, 2:신용융자B군, 3:신용융자C군, 4:신용융자D군, 8:신용대주
+		'trde_qty_tp': '0', # 거래량구분 0:전체조회, 5:5천주이상, 10:1만주이상, 50:5만주이상, 100:10만주이상, 200:20만주이상, 300:30만주이상, 500:500만주이상, 1000:백만주이상
+		'pric_tp': '0', # 가격구분 0:전체조회, 1:1천원미만, 2:1천원이상, 3:1천원~2천원, 4:2천원~5천원, 5:5천원이상, 6:5천원~1만원, 10:1만원미만, 7:1만원이상, 8:5만원이상, 9:10만원이상
+		'trde_prica_tp': '0', # 거래대금구분 0:전체조회, 1:1천만원이상, 3:3천만원이상, 4:5천만원이상, 10:1억원이상, 30:3억원이상, 50:5억원이상, 100:10억원이상, 300:30억원이상, 500:50억원이상, 1000:100억원이상, 3000:300억원이상, 5000:500억원이상
+		'mrkt_open_tp': '0', # 장운영구분 0:전체조회, 1:장중, 2:장전시간외, 3:장후시간외
+		'stex_tp': '3', # 거래소구분 1:KRX, 2:NXT 3.통합
+	}
+
+	# 3. API 실행
+	fn_ka10030(token=MY_ACCESS_TOKEN, data=params)
+
+	# next-key, cont-yn 값이 있을 경우
+	# fn_ka10030(token=MY_ACCESS_TOKEN, data=params, cont_yn='Y', next_key='nextkey..')
+
+import requests
+import json
+
+# 예상체결등락률상위요청
+def fn_ka10029(token, data, cont_yn='N', next_key=''):
+	# 1. 요청할 API URL
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	host = 'https://api.kiwoom.com' # 실전투자
+	endpoint = '/api/dostk/rkinfo'
+	url =  host + endpoint
+
+	# 2. header 데이터
+	headers = {
+		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'authorization': f'Bearer {token}', # 접근토큰
+		'cont-yn': cont_yn, # 연속조회여부
+		'next-key': next_key, # 연속조회키
+		'api-id': 'ka10029', # TR명
+	}
+
+	# 3. http POST 요청
+	response = requests.post(url, headers=headers, json=data)
+
+	# 4. 응답 상태 코드와 데이터 출력
+	print('Code:', response.status_code)
+	print('Header:', json.dumps({key: response.headers.get(key) for key in ['next-key', 'cont-yn', 'api-id']}, indent=4, ensure_ascii=False))
+	print('Body:', json.dumps(response.json(), indent=4, ensure_ascii=False))  # JSON 응답을 파싱하여 출력
+
+# 실행 구간
+if __name__ == '__main__':
+	# 1. 토큰 설정
+	MY_ACCESS_TOKEN = '사용자 AccessToken'# 접근토큰
+
+	# 2. 요청 데이터
+	params = {
+		'mrkt_tp': '000', # 시장구분 000:전체, 001:코스피, 101:코스닥
+		'sort_tp': '1', # 정렬구분 1:상승률, 2:상승폭, 3:보합, 4:하락률,5:하락폭, 6, 체결량, 7:상한, 8:하한
+		'trde_qty_cnd': '0', # 거래량조건 0:전체조회, 1;천주이상, 3:3천주, 5:5천주, 10:만주이상, 50:5만주이상, 100:10만주이상
+		'stk_cnd': '0', # 종목조건 0:전체조회, 1:관리종목제외, 3:우선주제외, 5:증100제외, 6:증100만보기, 7:증40만보기, 8:증30만보기, 9:증20만보기, 11:정리매매종목제외
+		'crd_cnd': '0', # 신용조건 0:전체조회, 1:신용융자A군, 2:신용융자B군, 3:신용융자C군, 4:신용융자D군, 9:신용융자전체
+		'pric_cnd': '0', # 가격조건 0:전체조회, 1:1천원미만, 2:1천원~2천원, 3:2천원~5천원, 4:5천원~1만원, 5:1만원이상, 8:1천원이상
+		'stex_tp': '3', # 거래소구분 1:KRX, 2:NXT 3.통합
+	}
+
+	# 3. API 실행
+	fn_ka10029(token=MY_ACCESS_TOKEN, data=params)
+
+	# next-key, cont-yn 값이 있을 경우
+	# fn_ka10029(token=MY_ACCESS_TOKEN, data=params, cont_yn='Y', next_key='nextkey..')
+
+import requests
+import json
+
+# 체결요청
+def fn_ka10076(token, data, cont_yn='N', next_key=''):
+	# 1. 요청할 API URL
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	host = 'https://api.kiwoom.com' # 실전투자
+	endpoint = '/api/dostk/acnt'
+	url =  host + endpoint
+
+	# 2. header 데이터
+	headers = {
+		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'authorization': f'Bearer {token}', # 접근토큰
+		'cont-yn': cont_yn, # 연속조회여부
+		'next-key': next_key, # 연속조회키
+		'api-id': 'ka10076', # TR명
+	}
+
+	# 3. http POST 요청
+	response = requests.post(url, headers=headers, json=data)
+
+	# 4. 응답 상태 코드와 데이터 출력
+	print('Code:', response.status_code)
+	print('Header:', json.dumps({key: response.headers.get(key) for key in ['next-key', 'cont-yn', 'api-id']}, indent=4, ensure_ascii=False))
+	print('Body:', json.dumps(response.json(), indent=4, ensure_ascii=False))  # JSON 응답을 파싱하여 출력
+
+# 실행 구간
+if __name__ == '__main__':
+	# 1. 토큰 설정
+	MY_ACCESS_TOKEN = '사용자 AccessToken'# 접근토큰
+
+	# 2. 요청 데이터
+	params = {
+		'stk_cd': '005930', # 종목코드 
+		'qry_tp': '1', # 조회구분 0:전체, 1:종목
+		'sell_tp': '0', # 매도수구분 0:전체, 1:매도, 2:매수
+		'ord_no': '', # 주문번호 
+		'stex_tp': '0', # 거래소구분  0 : 통합, 1 : KRX, 2 : NXT
+	}
+
+	# 3. API 실행
+	fn_ka10076(token=MY_ACCESS_TOKEN, data=params)
+
+	# next-key, cont-yn 값이 있을 경우
+	# fn_ka10076(token=MY_ACCESS_TOKEN, data=params, cont_yn='Y', next_key='nextkey..')
+
+import requests
+import json
+
+# 미체결요청
+def fn_ka10075(token, data, cont_yn='N', next_key=''):
+	# 1. 요청할 API URL
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	host = 'https://api.kiwoom.com' # 실전투자
+	endpoint = '/api/dostk/acnt'
+	url =  host + endpoint
+
+	# 2. header 데이터
+	headers = {
+		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'authorization': f'Bearer {token}', # 접근토큰
+		'cont-yn': cont_yn, # 연속조회여부
+		'next-key': next_key, # 연속조회키
+		'api-id': 'ka10075', # TR명
+	}
+
+	# 3. http POST 요청
+	response = requests.post(url, headers=headers, json=data)
+
+	# 4. 응답 상태 코드와 데이터 출력
+	print('Code:', response.status_code)
+	print('Header:', json.dumps({key: response.headers.get(key) for key in ['next-key', 'cont-yn', 'api-id']}, indent=4, ensure_ascii=False))
+	print('Body:', json.dumps(response.json(), indent=4, ensure_ascii=False))  # JSON 응답을 파싱하여 출력
+
+# 실행 구간
+if __name__ == '__main__':
+	# 1. 토큰 설정
+	MY_ACCESS_TOKEN = '사용자 AccessToken'# 접근토큰
+
+	# 2. 요청 데이터
+	params = {
+		'all_stk_tp': '1', # 전체종목구분 0:전체, 1:종목
+		'trde_tp': '0', # 매매구분 0:전체, 1:매도, 2:매수
+		'stk_cd': '005930', # 종목코드 
+		'stex_tp': '0', # 거래소구분 0 : 통합, 1 : KRX, 2 : NXT
+	}
+
+	# 3. API 실행
+	fn_ka10075(token=MY_ACCESS_TOKEN, data=params)
+
+	# next-key, cont-yn 값이 있을 경우
+	# fn_ka10075(token=MY_ACCESS_TOKEN, data=params, cont_yn='Y', next_key='nextkey..')
+
+import requests
+import json
+
+# 주식 매수주문
+def fn_kt10000(token, data, cont_yn='N', next_key=''):
+	# 1. 요청할 API URL
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	host = 'https://api.kiwoom.com' # 실전투자
+	endpoint = '/api/dostk/ordr'
+	url =  host + endpoint
+
+	# 2. header 데이터
+	headers = {
+		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'authorization': f'Bearer {token}', # 접근토큰
+		'cont-yn': cont_yn, # 연속조회여부
+		'next-key': next_key, # 연속조회키
+		'api-id': 'kt10000', # TR명
+	}
+
+	# 3. http POST 요청
+	response = requests.post(url, headers=headers, json=data)
+
+	# 4. 응답 상태 코드와 데이터 출력
+	print('Code:', response.status_code)
+	print('Header:', json.dumps({key: response.headers.get(key) for key in ['next-key', 'cont-yn', 'api-id']}, indent=4, ensure_ascii=False))
+	print('Body:', json.dumps(response.json(), indent=4, ensure_ascii=False))  # JSON 응답을 파싱하여 출력
+
+# 실행 구간
+if __name__ == '__main__':
+	# 1. 토큰 설정
+	MY_ACCESS_TOKEN = '사용자 AccessToken'# 접근토큰
+
+	# 2. 요청 데이터
+	params = {
+		'dmst_stex_tp': 'KRX', # 국내거래소구분 KRX,NXT,SOR
+		'stk_cd': '005930', # 종목코드 
+		'ord_qty': '1', # 주문수량 
+		'ord_uv': '', # 주문단가 
+		'trde_tp': '3', # 매매구분 0:보통 , 3:시장가 , 5:조건부지정가 , 81:장마감후시간외 , 61:장시작전시간외, 62:시간외단일가 , 6:최유리지정가 , 7:최우선지정가 , 10:보통(IOC) , 13:시장가(IOC) , 16:최유리(IOC) , 20:보통(FOK) , 23:시장가(FOK) , 26:최유리(FOK) , 28:스톱지정가,29:중간가,30:중간가(IOC),31:중간가(FOK)
+		'cond_uv': '', # 조건단가 
+	}
+
+	# 3. API 실행
+	fn_kt10000(token=MY_ACCESS_TOKEN, data=params)
+
+	# next-key, cont-yn 값이 있을 경우
+	# fn_kt10000(token=MY_ACCESS_TOKEN, data=params, cont_yn='Y', next_key='nextkey..')
+
+import requests
+import json
+
+# 주식 매도주문
+def fn_kt10001(token, data, cont_yn='N', next_key=''):
+	# 1. 요청할 API URL
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	host = 'https://api.kiwoom.com' # 실전투자
+	endpoint = '/api/dostk/ordr'
+	url =  host + endpoint
+
+	# 2. header 데이터
+	headers = {
+		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'authorization': f'Bearer {token}', # 접근토큰
+		'cont-yn': cont_yn, # 연속조회여부
+		'next-key': next_key, # 연속조회키
+		'api-id': 'kt10001', # TR명
+	}
+
+	# 3. http POST 요청
+	response = requests.post(url, headers=headers, json=data)
+
+	# 4. 응답 상태 코드와 데이터 출력
+	print('Code:', response.status_code)
+	print('Header:', json.dumps({key: response.headers.get(key) for key in ['next-key', 'cont-yn', 'api-id']}, indent=4, ensure_ascii=False))
+	print('Body:', json.dumps(response.json(), indent=4, ensure_ascii=False))  # JSON 응답을 파싱하여 출력
+
+# 실행 구간
+if __name__ == '__main__':
+	# 1. 토큰 설정
+	MY_ACCESS_TOKEN = '사용자 AccessToken'# 접근토큰
+
+	# 2. 요청 데이터
+	params = {
+		'dmst_stex_tp': 'KRX', # 국내거래소구분 KRX,NXT,SOR
+		'stk_cd': '005930', # 종목코드 
+		'ord_qty': '1', # 주문수량 
+		'ord_uv': '', # 주문단가 
+		'trde_tp': '3', # 매매구분 0:보통 , 3:시장가 , 5:조건부지정가 , 81:장마감후시간외 , 61:장시작전시간외, 62:시간외단일가 , 6:최유리지정가 , 7:최우선지정가 , 10:보통(IOC) , 13:시장가(IOC) , 16:최유리(IOC) , 20:보통(FOK) , 23:시장가(FOK) , 26:최유리(FOK) , 28:스톱지정가,29:중간가,30:중간가(IOC),31:중간가(FOK)
+		'cond_uv': '', # 조건단가 
+	}
+
+	# 3. API 실행
+	fn_kt10001(token=MY_ACCESS_TOKEN, data=params)
+
+	# next-key, cont-yn 값이 있을 경우
+	# fn_kt10001(token=MY_ACCESS_TOKEN, data=params, cont_yn='Y', next_key='nextkey..')
+
+import requests
+import json
+
+# 주식 정정주문
+def fn_kt10002(token, data, cont_yn='N', next_key=''):
+	# 1. 요청할 API URL
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	host = 'https://api.kiwoom.com' # 실전투자
+	endpoint = '/api/dostk/ordr'
+	url =  host + endpoint
+
+	# 2. header 데이터
+	headers = {
+		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'authorization': f'Bearer {token}', # 접근토큰
+		'cont-yn': cont_yn, # 연속조회여부
+		'next-key': next_key, # 연속조회키
+		'api-id': 'kt10002', # TR명
+	}
+
+	# 3. http POST 요청
+	response = requests.post(url, headers=headers, json=data)
+
+	# 4. 응답 상태 코드와 데이터 출력
+	print('Code:', response.status_code)
+	print('Header:', json.dumps({key: response.headers.get(key) for key in ['next-key', 'cont-yn', 'api-id']}, indent=4, ensure_ascii=False))
+	print('Body:', json.dumps(response.json(), indent=4, ensure_ascii=False))  # JSON 응답을 파싱하여 출력
+
+# 실행 구간
+if __name__ == '__main__':
+	# 1. 토큰 설정
+	MY_ACCESS_TOKEN = '사용자 AccessToken'# 접근토큰
+
+	# 2. 요청 데이터
+	params = {
+		'dmst_stex_tp': 'KRX', # 국내거래소구분 KRX,NXT,SOR
+		'orig_ord_no': '0000139', # 원주문번호 
+		'stk_cd': '005930', # 종목코드 
+		'mdfy_qty': '1', # 정정수량 
+		'mdfy_uv': '199700', # 정정단가 
+		'mdfy_cond_uv': '', # 정정조건단가 
+	}
+
+	# 3. API 실행
+	fn_kt10002(token=MY_ACCESS_TOKEN, data=params)
+
+	# next-key, cont-yn 값이 있을 경우
+	# fn_kt10002(token=MY_ACCESS_TOKEN, data=params, cont_yn='Y', next_key='nextkey..')
+
+import requests
+import json
+
+# 주식 취소주문
+def fn_kt10003(token, data, cont_yn='N', next_key=''):
+	# 1. 요청할 API URL
+	#host = 'https://mockapi.kiwoom.com' # 모의투자
+	host = 'https://api.kiwoom.com' # 실전투자
+	endpoint = '/api/dostk/ordr'
+	url =  host + endpoint
+
+	# 2. header 데이터
+	headers = {
+		'Content-Type': 'application/json;charset=UTF-8', # 컨텐츠타입
+		'authorization': f'Bearer {token}', # 접근토큰
+		'cont-yn': cont_yn, # 연속조회여부
+		'next-key': next_key, # 연속조회키
+		'api-id': 'kt10003', # TR명
+	}
+
+	# 3. http POST 요청
+	response = requests.post(url, headers=headers, json=data)
+
+	# 4. 응답 상태 코드와 데이터 출력
+	print('Code:', response.status_code)
+	print('Header:', json.dumps({key: response.headers.get(key) for key in ['next-key', 'cont-yn', 'api-id']}, indent=4, ensure_ascii=False))
+	print('Body:', json.dumps(response.json(), indent=4, ensure_ascii=False))  # JSON 응답을 파싱하여 출력
+
+# 실행 구간
+if __name__ == '__main__':
+	# 1. 토큰 설정
+	MY_ACCESS_TOKEN = '사용자 AccessToken'# 접근토큰
+
+	# 2. 요청 데이터
+	params = {
+		'dmst_stex_tp': 'KRX', # 국내거래소구분 KRX,NXT,SOR
+		'orig_ord_no': '0000140', # 원주문번호 
+		'stk_cd': '005930', # 종목코드 
+		'cncl_qty': '1', # 취소수량 '0' 입력시 잔량 전부 취소
+	}
+
+	# 3. API 실행
+	fn_kt10003(token=MY_ACCESS_TOKEN, data=params)
+
+	# next-key, cont-yn 값이 있을 경우
+	# fn_kt10003(token=MY_ACCESS_TOKEN, data=params, cont_yn='Y', next_key='nextkey..')
+
+import asyncio 
+import websockets
+import json
+
+# socket 정보
+# SOCKET_URL = 'wss://mockapi.kiwoom.com:10000/api/dostk/websocket'  # 모의투자 접속 URL
+SOCKET_URL = 'wss://api.kiwoom.com:10000/api/dostk/websocket'  # 접속 URL
+ACCESS_TOKEN = '사용자 AccessToken'  # 고객 Access Token
+
+class WebSocketClient:
+	def __init__(self, uri):
+		self.uri = uri
+		self.websocket = None
+		self.connected = False
+		self.keep_running = True
+
+	# WebSocket 서버에 연결합니다.
+	async def connect(self):
+		try:
+			self.websocket = await websockets.connect(self.uri)
+			self.connected = True
+			print("서버와 연결을 시도 중입니다.")
+
+			# 로그인 패킷
+			param = {
+				'trnm': 'LOGIN',
+				'token': ACCESS_TOKEN
+			}
+
+			print('실시간 시세 서버로 로그인 패킷을 전송합니다.')
+			# 웹소켓 연결 시 로그인 정보 전달
+			await self.send_message(message=param)
+
+		except Exception as e:
+			print(f'Connection error: {e}')
+			self.connected = False
+
+	# 서버에 메시지를 보냅니다. 연결이 없다면 자동으로 연결합니다.
+	async def send_message(self, message):
+		if not self.connected:
+			await self.connect()  # 연결이 끊어졌다면 재연결
+		if self.connected:
+			# message가 문자열이 아니면 JSON으로 직렬화
+			if not isinstance(message, str):
+				message = json.dumps(message)
+
+		await self.websocket.send(message)
+		print(f'Message sent: {message}')
+
+	# 서버에서 오는 메시지를 수신하여 출력합니다.
+	async def receive_messages(self):
+		while self.keep_running:
+			try:
+				# 서버로부터 수신한 메시지를 JSON 형식으로 파싱
+				response = json.loads(await self.websocket.recv())
+
+				# 메시지 유형이 LOGIN일 경우 로그인 시도 결과 체크
+				if response.get('trnm') == 'LOGIN':
+					if response.get('return_code') != 0:
+						print('로그인 실패하였습니다. : ', response.get('return_msg'))
+						await self.disconnect()
+					else:
+						print('로그인 성공하였습니다.')
+
+				# 메시지 유형이 PING일 경우 수신값 그대로 송신
+				elif response.get('trnm') == 'PING':
+					await self.send_message(response)
+
+				if response.get('trnm') != 'PING':
+					print(f'실시간 시세 서버 응답 수신: {response}')
+
+			except websockets.ConnectionClosed:
+				print('Connection closed by the server')
+				self.connected = False
+				await self.websocket.close()
+
+	# WebSocket 실행
+	async def run(self):
+		await self.connect()
+		await self.receive_messages()
+
+	# WebSocket 연결 종료
+	async def disconnect(self):
+		self.keep_running = False
+		if self.connected and self.websocket:
+			await self.websocket.close()
+			self.connected = False
+			print('Disconnected from WebSocket server')
+
+async def main():
+	# WebSocketClient 전역 변수 선언
+	websocket_client = WebSocketClient(SOCKET_URL)
+
+	# WebSocket 클라이언트를 백그라운드에서 실행합니다.
+	receive_task = asyncio.create_task(websocket_client.run())
+
+	# 실시간 항목 등록
+	await asyncio.sleep(1)
+	await websocket_client.send_message({ 
+		'trnm': 'REG', # 서비스명
+		'grp_no': '1', # 그룹번호
+		'refresh': '1', # 기존등록유지여부
+		'data': [{ # 실시간 등록 리스트
+			'item': [''], # 실시간 등록 요소
+			'type': ['00'], # 실시간 항목
+		}]
+	})
+
+	# 수신 작업이 종료될 때까지 대기
+	await receive_task
+
+# asyncio로 프로그램을 실행합니다.
+if __name__ == '__main__':
+	asyncio.run(main())
+
+import asyncio 
+import websockets
+import json
+
+# socket 정보
+# SOCKET_URL = 'wss://mockapi.kiwoom.com:10000/api/dostk/websocket'  # 모의투자 접속 URL
+SOCKET_URL = 'wss://api.kiwoom.com:10000/api/dostk/websocket'  # 접속 URL
+ACCESS_TOKEN = '사용자 AccessToken'  # 고객 Access Token
+
+class WebSocketClient:
+	def __init__(self, uri):
+		self.uri = uri
+		self.websocket = None
+		self.connected = False
+		self.keep_running = True
+
+	# WebSocket 서버에 연결합니다.
+	async def connect(self):
+		try:
+			self.websocket = await websockets.connect(self.uri)
+			self.connected = True
+			print("서버와 연결을 시도 중입니다.")
+
+			# 로그인 패킷
+			param = {
+				'trnm': 'LOGIN',
+				'token': ACCESS_TOKEN
+			}
+
+			print('실시간 시세 서버로 로그인 패킷을 전송합니다.')
+			# 웹소켓 연결 시 로그인 정보 전달
+			await self.send_message(message=param)
+
+		except Exception as e:
+			print(f'Connection error: {e}')
+			self.connected = False
+
+	# 서버에 메시지를 보냅니다. 연결이 없다면 자동으로 연결합니다.
+	async def send_message(self, message):
+		if not self.connected:
+			await self.connect()  # 연결이 끊어졌다면 재연결
+		if self.connected:
+			# message가 문자열이 아니면 JSON으로 직렬화
+			if not isinstance(message, str):
+				message = json.dumps(message)
+
+		await self.websocket.send(message)
+		print(f'Message sent: {message}')
+
+	# 서버에서 오는 메시지를 수신하여 출력합니다.
+	async def receive_messages(self):
+		while self.keep_running:
+			try:
+				# 서버로부터 수신한 메시지를 JSON 형식으로 파싱
+				response = json.loads(await self.websocket.recv())
+
+				# 메시지 유형이 LOGIN일 경우 로그인 시도 결과 체크
+				if response.get('trnm') == 'LOGIN':
+					if response.get('return_code') != 0:
+						print('로그인 실패하였습니다. : ', response.get('return_msg'))
+						await self.disconnect()
+					else:
+						print('로그인 성공하였습니다.')
+
+				# 메시지 유형이 PING일 경우 수신값 그대로 송신
+				elif response.get('trnm') == 'PING':
+					await self.send_message(response)
+
+				if response.get('trnm') != 'PING':
+					print(f'실시간 시세 서버 응답 수신: {response}')
+
+			except websockets.ConnectionClosed:
+				print('Connection closed by the server')
+				self.connected = False
+				await self.websocket.close()
+
+	# WebSocket 실행
+	async def run(self):
+		await self.connect()
+		await self.receive_messages()
+
+	# WebSocket 연결 종료
+	async def disconnect(self):
+		self.keep_running = False
+		if self.connected and self.websocket:
+			await self.websocket.close()
+			self.connected = False
+			print('Disconnected from WebSocket server')
+
+async def main():
+	# WebSocketClient 전역 변수 선언
+	websocket_client = WebSocketClient(SOCKET_URL)
+
+	# WebSocket 클라이언트를 백그라운드에서 실행합니다.
+	receive_task = asyncio.create_task(websocket_client.run())
+
+	# 실시간 항목 등록
+	await asyncio.sleep(1)
+	await websocket_client.send_message({ 
+		'trnm': 'REG', # 서비스명
+		'grp_no': '1', # 그룹번호
+		'refresh': '1', # 기존등록유지여부
+		'data': [{ # 실시간 등록 리스트
+			'item': [''], # 실시간 등록 요소
+			'type': ['04'], # 실시간 항목
+		}]
+	})
+
+	# 수신 작업이 종료될 때까지 대기
+	await receive_task
+
+# asyncio로 프로그램을 실행합니다.
+if __name__ == '__main__':
+	asyncio.run(main())
+
+import asyncio 
+import websockets
+import json
+
+# socket 정보
+# SOCKET_URL = 'wss://mockapi.kiwoom.com:10000/api/dostk/websocket'  # 모의투자 접속 URL
+SOCKET_URL = 'wss://api.kiwoom.com:10000/api/dostk/websocket'  # 접속 URL
+ACCESS_TOKEN = '사용자 AccessToken'  # 고객 Access Token
+
+class WebSocketClient:
+	def __init__(self, uri):
+		self.uri = uri
+		self.websocket = None
+		self.connected = False
+		self.keep_running = True
+
+	# WebSocket 서버에 연결합니다.
+	async def connect(self):
+		try:
+			self.websocket = await websockets.connect(self.uri)
+			self.connected = True
+			print("서버와 연결을 시도 중입니다.")
+
+			# 로그인 패킷
+			param = {
+				'trnm': 'LOGIN',
+				'token': ACCESS_TOKEN
+			}
+
+			print('실시간 시세 서버로 로그인 패킷을 전송합니다.')
+			# 웹소켓 연결 시 로그인 정보 전달
+			await self.send_message(message=param)
+
+		except Exception as e:
+			print(f'Connection error: {e}')
+			self.connected = False
+
+	# 서버에 메시지를 보냅니다. 연결이 없다면 자동으로 연결합니다.
+	async def send_message(self, message):
+		if not self.connected:
+			await self.connect()  # 연결이 끊어졌다면 재연결
+		if self.connected:
+			# message가 문자열이 아니면 JSON으로 직렬화
+			if not isinstance(message, str):
+				message = json.dumps(message)
+
+		await self.websocket.send(message)
+		print(f'Message sent: {message}')
+
+	# 서버에서 오는 메시지를 수신하여 출력합니다.
+	async def receive_messages(self):
+		while self.keep_running:
+			try:
+				# 서버로부터 수신한 메시지를 JSON 형식으로 파싱
+				response = json.loads(await self.websocket.recv())
+
+				# 메시지 유형이 LOGIN일 경우 로그인 시도 결과 체크
+				if response.get('trnm') == 'LOGIN':
+					if response.get('return_code') != 0:
+						print('로그인 실패하였습니다. : ', response.get('return_msg'))
+						await self.disconnect()
+					else:
+						print('로그인 성공하였습니다.')
+
+				# 메시지 유형이 PING일 경우 수신값 그대로 송신
+				elif response.get('trnm') == 'PING':
+					await self.send_message(response)
+
+				if response.get('trnm') != 'PING':
+					print(f'실시간 시세 서버 응답 수신: {response}')
+
+			except websockets.ConnectionClosed:
+				print('Connection closed by the server')
+				self.connected = False
+				await self.websocket.close()
+
+	# WebSocket 실행
+	async def run(self):
+		await self.connect()
+		await self.receive_messages()
+
+	# WebSocket 연결 종료
+	async def disconnect(self):
+		self.keep_running = False
+		if self.connected and self.websocket:
+			await self.websocket.close()
+			self.connected = False
+			print('Disconnected from WebSocket server')
+
+async def main():
+	# WebSocketClient 전역 변수 선언
+	websocket_client = WebSocketClient(SOCKET_URL)
+
+	# WebSocket 클라이언트를 백그라운드에서 실행합니다.
+	receive_task = asyncio.create_task(websocket_client.run())
+
+	# 실시간 항목 등록
+	await asyncio.sleep(1)
+	await websocket_client.send_message({ 
+		'trnm': 'REG', # 서비스명
+		'grp_no': '1', # 그룹번호
+		'refresh': '1', # 기존등록유지여부
+		'data': [{ # 실시간 등록 리스트
+			'item': ['005930'], # 실시간 등록 요소
+			'type': ['0B'], # 실시간 항목
+		}]
+	})
+
+	# 수신 작업이 종료될 때까지 대기
+	await receive_task
+
+# asyncio로 프로그램을 실행합니다.
+if __name__ == '__main__':
+	asyncio.run(main())
+import asyncio 
+import websockets
+import json
+
+# socket 정보
+# SOCKET_URL = 'wss://mockapi.kiwoom.com:10000/api/dostk/websocket'  # 모의투자 접속 URL
+SOCKET_URL = 'wss://api.kiwoom.com:10000/api/dostk/websocket'  # 접속 URL
+ACCESS_TOKEN = '사용자 AccessToken'  # 고객 Access Token
+
+class WebSocketClient:
+	def __init__(self, uri):
+		self.uri = uri
+		self.websocket = None
+		self.connected = False
+		self.keep_running = True
+
+	# WebSocket 서버에 연결합니다.
+	async def connect(self):
+		try:
+			self.websocket = await websockets.connect(self.uri)
+			self.connected = True
+			print("서버와 연결을 시도 중입니다.")
+
+			# 로그인 패킷
+			param = {
+				'trnm': 'LOGIN',
+				'token': ACCESS_TOKEN
+			}
+
+			print('실시간 시세 서버로 로그인 패킷을 전송합니다.')
+			# 웹소켓 연결 시 로그인 정보 전달
+			await self.send_message(message=param)
+
+		except Exception as e:
+			print(f'Connection error: {e}')
+			self.connected = False
+
+	# 서버에 메시지를 보냅니다. 연결이 없다면 자동으로 연결합니다.
+	async def send_message(self, message):
+		if not self.connected:
+			await self.connect()  # 연결이 끊어졌다면 재연결
+		if self.connected:
+			# message가 문자열이 아니면 JSON으로 직렬화
+			if not isinstance(message, str):
+				message = json.dumps(message)
+
+		await self.websocket.send(message)
+		print(f'Message sent: {message}')
+
+	# 서버에서 오는 메시지를 수신하여 출력합니다.
+	async def receive_messages(self):
+		while self.keep_running:
+			try:
+				# 서버로부터 수신한 메시지를 JSON 형식으로 파싱
+				response = json.loads(await self.websocket.recv())
+
+				# 메시지 유형이 LOGIN일 경우 로그인 시도 결과 체크
+				if response.get('trnm') == 'LOGIN':
+					if response.get('return_code') != 0:
+						print('로그인 실패하였습니다. : ', response.get('return_msg'))
+						await self.disconnect()
+					else:
+						print('로그인 성공하였습니다.')
+
+				# 메시지 유형이 PING일 경우 수신값 그대로 송신
+				elif response.get('trnm') == 'PING':
+					await self.send_message(response)
+
+				if response.get('trnm') != 'PING':
+					print(f'실시간 시세 서버 응답 수신: {response}')
+
+			except websockets.ConnectionClosed:
+				print('Connection closed by the server')
+				self.connected = False
+				await self.websocket.close()
+
+	# WebSocket 실행
+	async def run(self):
+		await self.connect()
+		await self.receive_messages()
+
+	# WebSocket 연결 종료
+	async def disconnect(self):
+		self.keep_running = False
+		if self.connected and self.websocket:
+			await self.websocket.close()
+			self.connected = False
+			print('Disconnected from WebSocket server')
+
+async def main():
+	# WebSocketClient 전역 변수 선언
+	websocket_client = WebSocketClient(SOCKET_URL)
+
+	# WebSocket 클라이언트를 백그라운드에서 실행합니다.
+	receive_task = asyncio.create_task(websocket_client.run())
+
+	# 실시간 항목 등록
+	await asyncio.sleep(1)
+	await websocket_client.send_message({ 
+		'trnm': 'REG', # 서비스명
+		'grp_no': '1', # 그룹번호
+		'refresh': '1', # 기존등록유지여부
+		'data': [{ # 실시간 등록 리스트
+			'item': [''], # 실시간 등록 요소
+			'type': ['00'], # 실시간 항목
+		}]
+	})
+
+	# 수신 작업이 종료될 때까지 대기
+	await receive_task
+
+# asyncio로 프로그램을 실행합니다.
+if __name__ == '__main__':
+	asyncio.run(main())
+
+import asyncio 
+import websockets
+import json
+
+# socket 정보
+# SOCKET_URL = 'wss://mockapi.kiwoom.com:10000/api/dostk/websocket'  # 모의투자 접속 URL
+SOCKET_URL = 'wss://api.kiwoom.com:10000/api/dostk/websocket'  # 접속 URL
+ACCESS_TOKEN = '사용자 AccessToken'  # 고객 Access Token
+
+class WebSocketClient:
+	def __init__(self, uri):
+		self.uri = uri
+		self.websocket = None
+		self.connected = False
+		self.keep_running = True
+
+	# WebSocket 서버에 연결합니다.
+	async def connect(self):
+		try:
+			self.websocket = await websockets.connect(self.uri)
+			self.connected = True
+			print("서버와 연결을 시도 중입니다.")
+
+			# 로그인 패킷
+			param = {
+				'trnm': 'LOGIN',
+				'token': ACCESS_TOKEN
+			}
+
+			print('실시간 시세 서버로 로그인 패킷을 전송합니다.')
+			# 웹소켓 연결 시 로그인 정보 전달
+			await self.send_message(message=param)
+
+		except Exception as e:
+			print(f'Connection error: {e}')
+			self.connected = False
+
+	# 서버에 메시지를 보냅니다. 연결이 없다면 자동으로 연결합니다.
+	async def send_message(self, message):
+		if not self.connected:
+			await self.connect()  # 연결이 끊어졌다면 재연결
+		if self.connected:
+			# message가 문자열이 아니면 JSON으로 직렬화
+			if not isinstance(message, str):
+				message = json.dumps(message)
+
+		await self.websocket.send(message)
+		print(f'Message sent: {message}')
+
+	# 서버에서 오는 메시지를 수신하여 출력합니다.
+	async def receive_messages(self):
+		while self.keep_running:
+			try:
+				# 서버로부터 수신한 메시지를 JSON 형식으로 파싱
+				response = json.loads(await self.websocket.recv())
+
+				# 메시지 유형이 LOGIN일 경우 로그인 시도 결과 체크
+				if response.get('trnm') == 'LOGIN':
+					if response.get('return_code') != 0:
+						print('로그인 실패하였습니다. : ', response.get('return_msg'))
+						await self.disconnect()
+					else:
+						print('로그인 성공하였습니다.')
+
+				# 메시지 유형이 PING일 경우 수신값 그대로 송신
+				elif response.get('trnm') == 'PING':
+					await self.send_message(response)
+
+				if response.get('trnm') != 'PING':
+					print(f'실시간 시세 서버 응답 수신: {response}')
+
+			except websockets.ConnectionClosed:
+				print('Connection closed by the server')
+				self.connected = False
+				await self.websocket.close()
+
+	# WebSocket 실행
+	async def run(self):
+		await self.connect()
+		await self.receive_messages()
+
+	# WebSocket 연결 종료
+	async def disconnect(self):
+		self.keep_running = False
+		if self.connected and self.websocket:
+			await self.websocket.close()
+			self.connected = False
+			print('Disconnected from WebSocket server')
+
+async def main():
+	# WebSocketClient 전역 변수 선언
+	websocket_client = WebSocketClient(SOCKET_URL)
+
+	# WebSocket 클라이언트를 백그라운드에서 실행합니다.
+	receive_task = asyncio.create_task(websocket_client.run())
+
+	# 실시간 항목 등록
+	await asyncio.sleep(1)
+	await websocket_client.send_message({ 
+		'trnm': 'REG', # 서비스명
+		'grp_no': '1', # 그룹번호
+		'refresh': '1', # 기존등록유지여부
+		'data': [{ # 실시간 등록 리스트
+			'item': ['005930'], # 실시간 등록 요소
+			'type': ['0A'], # 실시간 항목
+		}]
+	})
+
+	# 수신 작업이 종료될 때까지 대기
+	await receive_task
+
+# asyncio로 프로그램을 실행합니다.
+if __name__ == '__main__':
+	asyncio.run(main())
+
+
+import asyncio 
+import websockets
+import json
+
+# socket 정보
+# SOCKET_URL = 'wss://mockapi.kiwoom.com:10000/api/dostk/websocket'  # 모의투자 접속 URL
+SOCKET_URL = 'wss://api.kiwoom.com:10000/api/dostk/websocket'  # 접속 URL
+ACCESS_TOKEN = '사용자 AccessToken'  # 고객 Access Token
+
+class WebSocketClient:
+	def __init__(self, uri):
+		self.uri = uri
+		self.websocket = None
+		self.connected = False
+		self.keep_running = True
+
+	# WebSocket 서버에 연결합니다.
+	async def connect(self):
+		try:
+			self.websocket = await websockets.connect(self.uri)
+			self.connected = True
+			print("서버와 연결을 시도 중입니다.")
+
+			# 로그인 패킷
+			param = {
+				'trnm': 'LOGIN',
+				'token': ACCESS_TOKEN
+			}
+
+			print('실시간 시세 서버로 로그인 패킷을 전송합니다.')
+			# 웹소켓 연결 시 로그인 정보 전달
+			await self.send_message(message=param)
+
+		except Exception as e:
+			print(f'Connection error: {e}')
+			self.connected = False
+
+	# 서버에 메시지를 보냅니다. 연결이 없다면 자동으로 연결합니다.
+	async def send_message(self, message):
+		if not self.connected:
+			await self.connect()  # 연결이 끊어졌다면 재연결
+		if self.connected:
+			# message가 문자열이 아니면 JSON으로 직렬화
+			if not isinstance(message, str):
+				message = json.dumps(message)
+
+		await self.websocket.send(message)
+		print(f'Message sent: {message}')
+
+	# 서버에서 오는 메시지를 수신하여 출력합니다.
+	async def receive_messages(self):
+		while self.keep_running:
+			try:
+				# 서버로부터 수신한 메시지를 JSON 형식으로 파싱
+				response = json.loads(await self.websocket.recv())
+
+				# 메시지 유형이 LOGIN일 경우 로그인 시도 결과 체크
+				if response.get('trnm') == 'LOGIN':
+					if response.get('return_code') != 0:
+						print('로그인 실패하였습니다. : ', response.get('return_msg'))
+						await self.disconnect()
+					else:
+						print('로그인 성공하였습니다.')
+
+				# 메시지 유형이 PING일 경우 수신값 그대로 송신
+				elif response.get('trnm') == 'PING':
+					await self.send_message(response)
+
+				if response.get('trnm') != 'PING':
+					print(f'실시간 시세 서버 응답 수신: {response}')
+
+			except websockets.ConnectionClosed:
+				print('Connection closed by the server')
+				self.connected = False
+				await self.websocket.close()
+
+	# WebSocket 실행
+	async def run(self):
+		await self.connect()
+		await self.receive_messages()
+
+	# WebSocket 연결 종료
+	async def disconnect(self):
+		self.keep_running = False
+		if self.connected and self.websocket:
+			await self.websocket.close()
+			self.connected = False
+			print('Disconnected from WebSocket server')
+
+async def main():
+	# WebSocketClient 전역 변수 선언
+	websocket_client = WebSocketClient(SOCKET_URL)
+
+	# WebSocket 클라이언트를 백그라운드에서 실행합니다.
+	receive_task = asyncio.create_task(websocket_client.run())
+
+	# 실시간 항목 등록
+	await asyncio.sleep(1)
+	await websocket_client.send_message({ 
+		'trnm': 'REG', # 서비스명
+		'grp_no': '1', # 그룹번호
+		'refresh': '1', # 기존등록유지여부
+		'data': [{ # 실시간 등록 리스트
+			'item': ['005930'], # 실시간 등록 요소
+			'type': ['0C'], # 실시간 항목
+		}]
+	})
+
+	# 수신 작업이 종료될 때까지 대기
+	await receive_task
+
+# asyncio로 프로그램을 실행합니다.
+if __name__ == '__main__':
+	asyncio.run(main())
+
+import asyncio 
+import websockets
+import json
+
+# socket 정보
+# SOCKET_URL = 'wss://mockapi.kiwoom.com:10000/api/dostk/websocket'  # 모의투자 접속 URL
+SOCKET_URL = 'wss://api.kiwoom.com:10000/api/dostk/websocket'  # 접속 URL
+ACCESS_TOKEN = '사용자 AccessToken'  # 고객 Access Token
+
+class WebSocketClient:
+	def __init__(self, uri):
+		self.uri = uri
+		self.websocket = None
+		self.connected = False
+		self.keep_running = True
+
+	# WebSocket 서버에 연결합니다.
+	async def connect(self):
+		try:
+			self.websocket = await websockets.connect(self.uri)
+			self.connected = True
+			print("서버와 연결을 시도 중입니다.")
+
+			# 로그인 패킷
+			param = {
+				'trnm': 'LOGIN',
+				'token': ACCESS_TOKEN
+			}
+
+			print('실시간 시세 서버로 로그인 패킷을 전송합니다.')
+			# 웹소켓 연결 시 로그인 정보 전달
+			await self.send_message(message=param)
+
+		except Exception as e:
+			print(f'Connection error: {e}')
+			self.connected = False
+
+	# 서버에 메시지를 보냅니다. 연결이 없다면 자동으로 연결합니다.
+	async def send_message(self, message):
+		if not self.connected:
+			await self.connect()  # 연결이 끊어졌다면 재연결
+		if self.connected:
+			# message가 문자열이 아니면 JSON으로 직렬화
+			if not isinstance(message, str):
+				message = json.dumps(message)
+
+		await self.websocket.send(message)
+		print(f'Message sent: {message}')
+
+	# 서버에서 오는 메시지를 수신하여 출력합니다.
+	async def receive_messages(self):
+		while self.keep_running:
+			try:
+				# 서버로부터 수신한 메시지를 JSON 형식으로 파싱
+				response = json.loads(await self.websocket.recv())
+
+				# 메시지 유형이 LOGIN일 경우 로그인 시도 결과 체크
+				if response.get('trnm') == 'LOGIN':
+					if response.get('return_code') != 0:
+						print('로그인 실패하였습니다. : ', response.get('return_msg'))
+						await self.disconnect()
+					else:
+						print('로그인 성공하였습니다.')
+
+				# 메시지 유형이 PING일 경우 수신값 그대로 송신
+				elif response.get('trnm') == 'PING':
+					await self.send_message(response)
+
+				if response.get('trnm') != 'PING':
+					print(f'실시간 시세 서버 응답 수신: {response}')
+
+			except websockets.ConnectionClosed:
+				print('Connection closed by the server')
+				self.connected = False
+				await self.websocket.close()
+
+	# WebSocket 실행
+	async def run(self):
+		await self.connect()
+		await self.receive_messages()
+
+	# WebSocket 연결 종료
+	async def disconnect(self):
+		self.keep_running = False
+		if self.connected and self.websocket:
+			await self.websocket.close()
+			self.connected = False
+			print('Disconnected from WebSocket server')
+
+async def main():
+	# WebSocketClient 전역 변수 선언
+	websocket_client = WebSocketClient(SOCKET_URL)
+
+	# WebSocket 클라이언트를 백그라운드에서 실행합니다.
+	receive_task = asyncio.create_task(websocket_client.run())
+
+	# 실시간 항목 등록
+	await asyncio.sleep(1)
+	await websocket_client.send_message({ 
+		'trnm': 'REG', # 서비스명
+		'grp_no': '1', # 그룹번호
+		'refresh': '1', # 기존등록유지여부
+		'data': [{ # 실시간 등록 리스트
+			'item': ['005930'], # 실시간 등록 요소
+			'type': ['0D'], # 실시간 항목
+		}]
+	})
+
+	# 수신 작업이 종료될 때까지 대기
+	await receive_task
+
+# asyncio로 프로그램을 실행합니다.
+if __name__ == '__main__':
+	asyncio.run(main())
+
+import asyncio 
+import websockets
+import json
+
+# socket 정보
+# SOCKET_URL = 'wss://mockapi.kiwoom.com:10000/api/dostk/websocket'  # 모의투자 접속 URL
+SOCKET_URL = 'wss://api.kiwoom.com:10000/api/dostk/websocket'  # 접속 URL
+ACCESS_TOKEN = '사용자 AccessToken'  # 고객 Access Token
+
+class WebSocketClient:
+	def __init__(self, uri):
+		self.uri = uri
+		self.websocket = None
+		self.connected = False
+		self.keep_running = True
+
+	# WebSocket 서버에 연결합니다.
+	async def connect(self):
+		try:
+			self.websocket = await websockets.connect(self.uri)
+			self.connected = True
+			print("서버와 연결을 시도 중입니다.")
+
+			# 로그인 패킷
+			param = {
+				'trnm': 'LOGIN',
+				'token': ACCESS_TOKEN
+			}
+
+			print('실시간 시세 서버로 로그인 패킷을 전송합니다.')
+			# 웹소켓 연결 시 로그인 정보 전달
+			await self.send_message(message=param)
+
+		except Exception as e:
+			print(f'Connection error: {e}')
+			self.connected = False
+
+	# 서버에 메시지를 보냅니다. 연결이 없다면 자동으로 연결합니다.
+	async def send_message(self, message):
+		if not self.connected:
+			await self.connect()  # 연결이 끊어졌다면 재연결
+		if self.connected:
+			# message가 문자열이 아니면 JSON으로 직렬화
+			if not isinstance(message, str):
+				message = json.dumps(message)
+
+		await self.websocket.send(message)
+		print(f'Message sent: {message}')
+
+	# 서버에서 오는 메시지를 수신하여 출력합니다.
+	async def receive_messages(self):
+		while self.keep_running:
+			try:
+				# 서버로부터 수신한 메시지를 JSON 형식으로 파싱
+				response = json.loads(await self.websocket.recv())
+
+				# 메시지 유형이 LOGIN일 경우 로그인 시도 결과 체크
+				if response.get('trnm') == 'LOGIN':
+					if response.get('return_code') != 0:
+						print('로그인 실패하였습니다. : ', response.get('return_msg'))
+						await self.disconnect()
+					else:
+						print('로그인 성공하였습니다.')
+
+				# 메시지 유형이 PING일 경우 수신값 그대로 송신
+				elif response.get('trnm') == 'PING':
+					await self.send_message(response)
+
+				if response.get('trnm') != 'PING':
+					print(f'실시간 시세 서버 응답 수신: {response}')
+
+			except websockets.ConnectionClosed:
+				print('Connection closed by the server')
+				self.connected = False
+				await self.websocket.close()
+
+	# WebSocket 실행
+	async def run(self):
+		await self.connect()
+		await self.receive_messages()
+
+	# WebSocket 연결 종료
+	async def disconnect(self):
+		self.keep_running = False
+		if self.connected and self.websocket:
+			await self.websocket.close()
+			self.connected = False
+			print('Disconnected from WebSocket server')
+
+async def main():
+	# WebSocketClient 전역 변수 선언
+	websocket_client = WebSocketClient(SOCKET_URL)
+
+	# WebSocket 클라이언트를 백그라운드에서 실행합니다.
+	receive_task = asyncio.create_task(websocket_client.run())
+
+	# 실시간 항목 등록
+	await asyncio.sleep(1)
+	await websocket_client.send_message({ 
+		'trnm': 'CNSRLST', # TR명
+	})
+
+	# 수신 작업이 종료될 때까지 대기
+	await receive_task
+
+# asyncio로 프로그램을 실행합니다.
+if __name__ == '__main__':
+	asyncio.run(main())
+
+import asyncio 
+import websockets
+import json
+
+# socket 정보
+# SOCKET_URL = 'wss://mockapi.kiwoom.com:10000/api/dostk/websocket'  # 모의투자 접속 URL
+SOCKET_URL = 'wss://api.kiwoom.com:10000/api/dostk/websocket'  # 접속 URL
+ACCESS_TOKEN = '사용자 AccessToken'  # 고객 Access Token
+
+class WebSocketClient:
+	def __init__(self, uri):
+		self.uri = uri
+		self.websocket = None
+		self.connected = False
+		self.keep_running = True
+
+	# WebSocket 서버에 연결합니다.
+	async def connect(self):
+		try:
+			self.websocket = await websockets.connect(self.uri)
+			self.connected = True
+			print("서버와 연결을 시도 중입니다.")
+
+			# 로그인 패킷
+			param = {
+				'trnm': 'LOGIN',
+				'token': ACCESS_TOKEN
+			}
+
+			print('실시간 시세 서버로 로그인 패킷을 전송합니다.')
+			# 웹소켓 연결 시 로그인 정보 전달
+			await self.send_message(message=param)
+
+		except Exception as e:
+			print(f'Connection error: {e}')
+			self.connected = False
+
+	# 서버에 메시지를 보냅니다. 연결이 없다면 자동으로 연결합니다.
+	async def send_message(self, message):
+		if not self.connected:
+			await self.connect()  # 연결이 끊어졌다면 재연결
+		if self.connected:
+			# message가 문자열이 아니면 JSON으로 직렬화
+			if not isinstance(message, str):
+				message = json.dumps(message)
+
+		await self.websocket.send(message)
+		print(f'Message sent: {message}')
+
+	# 서버에서 오는 메시지를 수신하여 출력합니다.
+	async def receive_messages(self):
+		while self.keep_running:
+			try:
+				# 서버로부터 수신한 메시지를 JSON 형식으로 파싱
+				response = json.loads(await self.websocket.recv())
+
+				# 메시지 유형이 LOGIN일 경우 로그인 시도 결과 체크
+				if response.get('trnm') == 'LOGIN':
+					if response.get('return_code') != 0:
+						print('로그인 실패하였습니다. : ', response.get('return_msg'))
+						await self.disconnect()
+					else:
+						print('로그인 성공하였습니다.')
+						print('조건검색 목록조회 패킷을 전송합니다.')
+						# 로그인 패킷
+						param = {
+							'trnm': 'CNSRLST'
+						}
+						await self.send_message(message=param)
+
+				# 메시지 유형이 PING일 경우 수신값 그대로 송신
+				elif response.get('trnm') == 'PING':
+					await self.send_message(response)
+
+				if response.get('trnm') != 'PING':
+					print(f'실시간 시세 서버 응답 수신: {response}')
+
+			except websockets.ConnectionClosed:
+				print('Connection closed by the server')
+				self.connected = False
+				await self.websocket.close()
+
+	# WebSocket 실행
+	async def run(self):
+		await self.connect()
+		await self.receive_messages()
+
+	# WebSocket 연결 종료
+	async def disconnect(self):
+		self.keep_running = False
+		if self.connected and self.websocket:
+			await self.websocket.close()
+			self.connected = False
+			print('Disconnected from WebSocket server')
+
+async def main():
+	# WebSocketClient 전역 변수 선언
+	websocket_client = WebSocketClient(SOCKET_URL)
+
+	# WebSocket 클라이언트를 백그라운드에서 실행합니다.
+	receive_task = asyncio.create_task(websocket_client.run())
+
+	# 실시간 항목 등록
+	await asyncio.sleep(1)
+	await websocket_client.send_message({ 
+		'trnm': 'CNSRREQ', # 서비스명
+		'seq': '4', # 조건검색식 일련번호
+		'search_type': '0', # 조회타입
+		'stex_tp': 'K', # 거래소구분
+		'cont_yn': 'N', # 연속조회여부
+		'next_key': '', # 연속조회키
+	})
+
+	# 수신 작업이 종료될 때까지 대기
+	await receive_task
+
+# asyncio로 프로그램을 실행합니다.
+if __name__ == '__main__':
+	asyncio.run(main())
+
+import asyncio 
+import websockets
+import json
+
+# socket 정보
+# SOCKET_URL = 'wss://mockapi.kiwoom.com:10000/api/dostk/websocket'  # 모의투자 접속 URL
+SOCKET_URL = 'wss://api.kiwoom.com:10000/api/dostk/websocket'  # 접속 URL
+ACCESS_TOKEN = '사용자 AccessToken'  # 고객 Access Token
+
+class WebSocketClient:
+	def __init__(self, uri):
+		self.uri = uri
+		self.websocket = None
+		self.connected = False
+		self.keep_running = True
+
+	# WebSocket 서버에 연결합니다.
+	async def connect(self):
+		try:
+			self.websocket = await websockets.connect(self.uri)
+			self.connected = True
+			print("서버와 연결을 시도 중입니다.")
+
+			# 로그인 패킷
+			param = {
+				'trnm': 'LOGIN',
+				'token': ACCESS_TOKEN
+			}
+
+			print('실시간 시세 서버로 로그인 패킷을 전송합니다.')
+			# 웹소켓 연결 시 로그인 정보 전달
+			await self.send_message(message=param)
+
+		except Exception as e:
+			print(f'Connection error: {e}')
+			self.connected = False
+
+	# 서버에 메시지를 보냅니다. 연결이 없다면 자동으로 연결합니다.
+	async def send_message(self, message):
+		if not self.connected:
+			await self.connect()  # 연결이 끊어졌다면 재연결
+		if self.connected:
+			# message가 문자열이 아니면 JSON으로 직렬화
+			if not isinstance(message, str):
+				message = json.dumps(message)
+
+		await self.websocket.send(message)
+		print(f'Message sent: {message}')
+
+	# 서버에서 오는 메시지를 수신하여 출력합니다.
+	async def receive_messages(self):
+		while self.keep_running:
+			try:
+				# 서버로부터 수신한 메시지를 JSON 형식으로 파싱
+				response = json.loads(await self.websocket.recv())
+
+				# 메시지 유형이 LOGIN일 경우 로그인 시도 결과 체크
+				if response.get('trnm') == 'LOGIN':
+					if response.get('return_code') != 0:
+						print('로그인 실패하였습니다. : ', response.get('return_msg'))
+						await self.disconnect()
+					else:
+						print('로그인 성공하였습니다.')
+						print('조건검색 목록조회 패킷을 전송합니다.')
+						# 로그인 패킷
+						param = {
+							'trnm': 'CNSRLST'
+						}
+						await self.send_message(message=param)
+
+				# 메시지 유형이 PING일 경우 수신값 그대로 송신
+				elif response.get('trnm') == 'PING':
+					await self.send_message(response)
+
+				if response.get('trnm') != 'PING':
+					print(f'실시간 시세 서버 응답 수신: {response}')
+
+			except websockets.ConnectionClosed:
+				print('Connection closed by the server')
+				self.connected = False
+				await self.websocket.close()
+
+	# WebSocket 실행
+	async def run(self):
+		await self.connect()
+		await self.receive_messages()
+
+	# WebSocket 연결 종료
+	async def disconnect(self):
+		self.keep_running = False
+		if self.connected and self.websocket:
+			await self.websocket.close()
+			self.connected = False
+			print('Disconnected from WebSocket server')
+
+async def main():
+	# WebSocketClient 전역 변수 선언
+	websocket_client = WebSocketClient(SOCKET_URL)
+
+	# WebSocket 클라이언트를 백그라운드에서 실행합니다.
+	receive_task = asyncio.create_task(websocket_client.run())
+
+	# 실시간 항목 등록
+	await asyncio.sleep(1)
+	await websocket_client.send_message({ 
+		'trnm': 'CNSRREQ', # 서비스명
+		'seq': '4', # 조건검색식 일련번호
+		'search_type': '1', # 조회타입
+		'stex_tp': 'K', # 거래소구분
+	})
+
+	# 수신 작업이 종료될 때까지 대기
+	await receive_task
+
+# asyncio로 프로그램을 실행합니다.
+if __name__ == '__main__':
+	asyncio.run(main())
+
+import asyncio 
+import websockets
+import json
+
+# socket 정보
+# SOCKET_URL = 'wss://mockapi.kiwoom.com:10000/api/dostk/websocket'  # 모의투자 접속 URL
+SOCKET_URL = 'wss://api.kiwoom.com:10000/api/dostk/websocket'  # 접속 URL
+ACCESS_TOKEN = '사용자 AccessToken'  # 고객 Access Token
+
+class WebSocketClient:
+	def __init__(self, uri):
+		self.uri = uri
+		self.websocket = None
+		self.connected = False
+		self.keep_running = True
+
+	# WebSocket 서버에 연결합니다.
+	async def connect(self):
+		try:
+			self.websocket = await websockets.connect(self.uri)
+			self.connected = True
+			print("서버와 연결을 시도 중입니다.")
+
+			# 로그인 패킷
+			param = {
+				'trnm': 'LOGIN',
+				'token': ACCESS_TOKEN
+			}
+
+			print('실시간 시세 서버로 로그인 패킷을 전송합니다.')
+			# 웹소켓 연결 시 로그인 정보 전달
+			await self.send_message(message=param)
+
+		except Exception as e:
+			print(f'Connection error: {e}')
+			self.connected = False
+
+	# 서버에 메시지를 보냅니다. 연결이 없다면 자동으로 연결합니다.
+	async def send_message(self, message):
+		if not self.connected:
+			await self.connect()  # 연결이 끊어졌다면 재연결
+		if self.connected:
+			# message가 문자열이 아니면 JSON으로 직렬화
+			if not isinstance(message, str):
+				message = json.dumps(message)
+
+		await self.websocket.send(message)
+		print(f'Message sent: {message}')
+
+	# 서버에서 오는 메시지를 수신하여 출력합니다.
+	async def receive_messages(self):
+		while self.keep_running:
+			try:
+				# 서버로부터 수신한 메시지를 JSON 형식으로 파싱
+				response = json.loads(await self.websocket.recv())
+
+				# 메시지 유형이 LOGIN일 경우 로그인 시도 결과 체크
+				if response.get('trnm') == 'LOGIN':
+					if response.get('return_code') != 0:
+						print('로그인 실패하였습니다. : ', response.get('return_msg'))
+						await self.disconnect()
+					else:
+						print('로그인 성공하였습니다.')
+
+				# 메시지 유형이 PING일 경우 수신값 그대로 송신
+				elif response.get('trnm') == 'PING':
+					await self.send_message(response)
+
+				if response.get('trnm') != 'PING':
+					print(f'실시간 시세 서버 응답 수신: {response}')
+
+			except websockets.ConnectionClosed:
+				print('Connection closed by the server')
+				self.connected = False
+				await self.websocket.close()
+
+	# WebSocket 실행
+	async def run(self):
+		await self.connect()
+		await self.receive_messages()
+
+	# WebSocket 연결 종료
+	async def disconnect(self):
+		self.keep_running = False
+		if self.connected and self.websocket:
+			await self.websocket.close()
+			self.connected = False
+			print('Disconnected from WebSocket server')
+
+async def main():
+	# WebSocketClient 전역 변수 선언
+	websocket_client = WebSocketClient(SOCKET_URL)
+
+	# WebSocket 클라이언트를 백그라운드에서 실행합니다.
+	receive_task = asyncio.create_task(websocket_client.run())
+
+	# 실시간 항목 등록
+	await asyncio.sleep(1)
+	await websocket_client.send_message({ 
+		'trnm': 'CNSRCLR', # 서비스명
+		'seq': '1', # 조건검색식 일련번호
+	})
+
+	# 수신 작업이 종료될 때까지 대기
+	await receive_task
+
+# asyncio로 프로그램을 실행합니다.
+if __name__ == '__main__':
+	asyncio.run(main())
+
+
